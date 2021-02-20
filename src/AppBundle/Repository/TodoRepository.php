@@ -74,22 +74,16 @@ class TodoRepository extends EntityRepository implements TodoInterface
     /**
      * @inheritDoc
      */
-    public function showListado(int $id): Tarea
+    public function showListado(): array
     {
-      if(empty($id))
-      {
-          throw new \Exception('no id');
-      }
-      /** @var Todo $tareaEdit */
-        $tareaEdit = $this->entityManager->find(Todo::class, $id);
 
+        $tareaEdit = $this->entityManager->getRepository(Todo::class)->findAll();
         if($tareaEdit === null)
         {
             throw new \Exception('no found');
         }
 
         $this->translator->toDomain($tareaEdit);
-
     }
 
 

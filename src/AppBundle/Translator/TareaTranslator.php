@@ -28,19 +28,31 @@ class TareaTranslator
 
 
     /**
-     * @param Todo $tareaEntity
-     * @return Tarea
+     * @param array $tareaEntity
+     * @return array
      */
-    public function toDomain(Todo $tareaEntity): Tarea
+    public function toDomain(array $tareaEntity): array
     {
-        return $this->tareaFactory->crearTarea(
-                    $tareaEntity->getId(),
-                    $tareaEntity->getName(),
-                    $tareaEntity->getFechaCreacion(),
-                    $tareaEntity->getFechaTope(),
-                    $tareaEntity->getEstado()
-                    );
+        $tareas = [];
 
+        if(empty($tareaEntity))
+        {
+            return  $tareas;
+        }
+
+        /** @var Tarea| $item */
+        foreach ($tareaEntity as $item) {
+
+            $tareas[$item->id()] =  $this->tareaFactory->crearTarea(
+                $item->getId(),
+                $item->getName(),
+                $item->getFechaCreacion(),
+                $item->getFechaTope(),
+                $item->getEstado()
+            );
+        }
+
+      return $tareas;
     }
 
 }
