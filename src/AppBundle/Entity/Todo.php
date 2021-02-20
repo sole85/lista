@@ -51,6 +51,24 @@ class Todo
 
 
     /**
+     * Todo constructor.
+     * @param int $id
+     * @param string $name
+     * @param \DateTime $fechaCreacion
+     * @param \DateTime $fechaTope
+     * @throws \Exception
+     */
+    public function __construct(int $id, string $name, \DateTime $fechaCreacion, \DateTime $fechaTope)
+    {
+        $this->id= $id;
+        $this->name = $name;
+        $this->fechaCreacion = new \DateTime();
+        $this->fechaTope = $fechaTope;
+        $this->estado = false;
+    }
+
+
+    /**
      * Get id.
      *
      * @return int
