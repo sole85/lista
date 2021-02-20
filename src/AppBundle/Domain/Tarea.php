@@ -29,14 +29,15 @@ class Tarea implements TareaInterface
      * @param string $name
      * @param \DateTime $fechaCreacion
      * @param \DateTime $fechaTope
+     * @param bool $estado
      */
-    public function __construct(int $id, string $name, \DateTime $fechaCreacion, \DateTime $fechaTope)
+    public function __construct(int $id, string $name, \DateTime $fechaCreacion, \DateTime $fechaTope, bool $estado)
     {
         $this->id = $id;
         $this->name = $name;
         $this->fechaCreacion = $fechaCreacion;
         $this->fechaTope = $fechaTope;
-        $this->estado = false;
+        $this->estado = $estado;
     }
 
 

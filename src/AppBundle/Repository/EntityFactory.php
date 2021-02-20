@@ -13,16 +13,24 @@ class EntityFactory
 
     /**
      * @param Tarea $tarea
+     * @param Todo|null $tareaEdit
      * @return Todo
      * @throws \Exception
      */
-    public function createTareaEntityFromDomain(Tarea $tarea):Todo
+    public function createTareaEntityFromDomain(
+        Tarea $tarea,
+        ?Todo $tareaEdit = null
+    ):Todo
     {
-        return new Todo(
-            $tarea->id(),
-            $tarea->name(),
-            $tarea->fechaCreacion(),
-            $tarea->fechaLimite());
+        $tareaEntity = $tareaEdit ??  new Todo(
+                                            $tarea->id(),
+                                            $tarea->name(),
+                                            $tarea->fechaCreacion(),
+                                            $tarea->fechaLimite());
+
+        $tareaEntity->setEstado($tarea->estado());
+
+        return $tareaEntity;
     }
 
 

@@ -5,6 +5,7 @@ namespace AppBundle\Repository;
 use AppBundle\Domain\Tarea;
 use AppBundle\Domain\TodoInterface;
 use AppBundle\Entity\Todo;
+use AppBundle\Translator\TareaTranslator;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping;
@@ -26,19 +27,24 @@ class TodoRepository extends EntityRepository implements TodoInterface
     /** @var EntityFactory  */
     private $factory;
 
+    /** @var TareaTranslator  */
+    private $translator;
+
     /**
      * TodoRepository constructor.
      * @param EntityManagerInterface $em
      * @param ClassMetadata $class
      * @param EntityFactory $factory
+     * @param TareaTranslator $translator
      */
-    public function __construct(EntityManagerInterface $em, ClassMetadata $class, EntityFactory $factory)
+    public function __construct(EntityManagerInterface $em, ClassMetadata $class, EntityFactory $factory, TareaTranslator $translator)
     {
         parent::__construct($em, $class);
 
         $this->entityManager = $em;
 
         $this->factory = $factory;
+        $this->translator = $translator;
     }
 
 
@@ -48,6 +54,7 @@ class TodoRepository extends EntityRepository implements TodoInterface
     public function addElement(Tarea $tarea): Tarea
     {
         try {
+            /** @var Todo|null $tareaEdit */
             $tareaEdit= $this->entityManager->find(Todo::class, $tarea->id());
         }catch (\Exception $exception)
         {
@@ -56,7 +63,7 @@ class TodoRepository extends EntityRepository implements TodoInterface
 
         if($tareaEdit === null)
         {
-            $tareaEntity = $this->factory->createTareaEntityFromDomain($tarea);
+            $tareaEntity = $this->factory->createTareaEntityFromDomain($tarea, $tareaEdit);
             $this->entityManager->persist($tareaEntity);
             $this->entityManager->flush();
         }
@@ -67,8 +74,23 @@ class TodoRepository extends EntityRepository implements TodoInterface
     /**
      * @inheritDoc
      */
-    public function showListado(): TodoInterface
+    public function showListado(int $id): Tarea
     {
-        // TODO: Implement showListado() method.
+      if(empty($id))
+      {
+          throw new \Exception('no id');
+      }
+      /** @var Todo $tareaEdit */
+        $tareaEdit = $this->entityManager->find(Todo::class, $id);
+
+        if($tareaEdit === null)
+        {
+            throw new \Exception('no found');
+        }
+
+        $this->translator->toDomain($tareaEdit);
+
     }
+
+
 }

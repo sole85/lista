@@ -19,8 +19,9 @@ interface TodoInterface
 
 
     /**
-     * @return TodoInterface
+     * @param int $id
+     * @return Tarea
      */
-    public function showListado(): TodoInterface;
+    public function showListado(int $id): Tarea;
 
 }
