@@ -4,6 +4,8 @@
 namespace AppBundle\Domain;
 
 
+use Symfony\Component\Uid\NilUuid;
+use Symfony\Component\Uid\Uuid;
 /**
  * Class Tarea
  * @package AppBundle\Domain
@@ -11,8 +13,7 @@ namespace AppBundle\Domain;
 class Tarea implements TareaInterface
 {
 
-
-    protected $id;
+    protected  $id;
 
     protected $name;
 
@@ -29,25 +30,23 @@ class Tarea implements TareaInterface
      * @param string $name
      * @param \DateTime $fechaCreacion
      * @param \DateTime $fechaTope
+     * @param bool $estado
      */
-    public function __construct(int $id, string $name, \DateTime $fechaCreacion, \DateTime $fechaTope)
+    public function __construct( string $name, \DateTime $fechaCreacion, \DateTime $fechaTope, bool $estado = false, ?int $id = 0)
     {
         $this->id = $id;
         $this->name = $name;
         $this->fechaCreacion = $fechaCreacion;
         $this->fechaTope = $fechaTope;
-        $this->estado = false;
+        $this->estado = $estado;
     }
-
 
     /**
      * @inheritDoc
      */
-    public function id(): int
+    public function getid(): int
     {
-
         return $this->id;
-
     }
 
     /**
@@ -80,5 +79,15 @@ class Tarea implements TareaInterface
     public function estado(): bool
     {
         return $this->estado;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function changeEstado(bool $estado): Tarea
+    {
+        $this->estado = $estado;
+
+        return $this;
     }
 }

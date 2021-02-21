@@ -4,6 +4,8 @@
 namespace AppBundle\Domain;
 
 
+use AppBundle\Entity\Todo;
+
 /**
  * Interface TodoInterface
  * @package AppBundle\Domain
@@ -19,8 +21,15 @@ interface TodoInterface
 
 
     /**
-     * @return TodoInterface
+     * @return array
      */
-    public function showListado(): TodoInterface;
+    public function showListado(): array ;
+
+
+    /**
+     * @param int $id
+
+     */
+    public function findTareaById(int $id);
 
 }

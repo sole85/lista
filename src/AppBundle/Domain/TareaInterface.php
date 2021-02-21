@@ -12,11 +12,6 @@ interface TareaInterface
 {
 
 
-    /**
-     * @return int
-     */
-    public function id(): int;
-
 
     /**
      * @return string
@@ -38,5 +33,10 @@ interface TareaInterface
      */
     public function estado(): bool ;
 
+    /**
+     * @param bool $estado
+     * @return Tarea
+     */
+    public function changeEstado(bool  $estado): Tarea ;
 
 }
