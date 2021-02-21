@@ -29,18 +29,13 @@ class TareaTranslator
 
     /**
      * @param array $tareaEntity
-     * @return array
      */
-    public function toDomain(array $tareaEntity): array
+    public function toDomain($tareaEntity)
     {
-        $tareas = [];
 
-        if(empty($tareaEntity))
-        {
-            return  $tareas;
-        }
 
-        /** @var Tarea| $item */
+
+        /** @var Todo| $item */
         foreach ($tareaEntity as $item) {
 
             $tareas[] =  $this->tareaFactory->crearTarea(
@@ -48,7 +43,7 @@ class TareaTranslator
                 $item->getFechaCreacion(),
                 $item->getFechaTope(),
                 $item->getEstado(),
-                $item->getid()
+                $item->getId()
             );
         }
 

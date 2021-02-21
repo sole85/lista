@@ -87,4 +87,17 @@ class TodoRepository  implements TodoInterface
 
         return $tarea;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function findTareaById(int $id)
+    {
+
+        $tareaEdit = $this->entityManager->find(Todo::class, $id);
+
+         return  $this->translator->toDomain([$tareaEdit])[0];
+
+
+    }
 }

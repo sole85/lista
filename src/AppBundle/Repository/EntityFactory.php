@@ -32,6 +32,27 @@ class EntityFactory
 
         return $tareaEntity;
     }
+    /**
+     * @param Tarea $tarea
+     * @param Todo|null $tareaEdit
+     * @return Todo
+     * @throws \Exception
+     */
+    public function createTareaEntityFromArray(
+        Tarea $tarea,
+        ?Todo $tareaEdit = null
+    ):Todo
+    {
 
+        $tareaEntity = $tareaEdit ??  new Todo(
+                $tarea->getid(),
+                $tarea->name(),
+                $tarea->fechaCreacion(),
+                $tarea->fechaLimite());
+
+        $tareaEntity->setEstado($tarea->estado());
+
+        return $tareaEntity;
+    }
 
 }

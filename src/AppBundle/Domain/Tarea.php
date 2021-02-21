@@ -80,4 +80,14 @@ class Tarea implements TareaInterface
     {
         return $this->estado;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function changeEstado(bool $estado): Tarea
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
 }
