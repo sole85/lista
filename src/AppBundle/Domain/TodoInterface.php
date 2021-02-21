@@ -19,8 +19,8 @@ interface TodoInterface
 
 
     /**
-     * @return TodoInterface
+     * @return array
      */
-    public function showListado(): TodoInterface;
+    public function showListado(): array ;
 
 }

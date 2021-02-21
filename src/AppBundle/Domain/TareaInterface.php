@@ -12,11 +12,6 @@ interface TareaInterface
 {
 
 
-    /**
-     * @return int
-     */
-    public function id(): int;
-
 
     /**
      * @return string
