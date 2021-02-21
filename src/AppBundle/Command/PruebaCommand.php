@@ -28,8 +28,8 @@ class PruebaCommand extends ContainerAwareCommand
     {
 
         $this
-            ->setName('demo:greet')
-            ->setDescription('Greet someone')
+            ->setName('demo:tarea')
+            ->setDescription('add tarea')
             ->addArgument(
                 'name',
                 InputArgument::REQUIRED,
