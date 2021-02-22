@@ -30,16 +30,6 @@ class DefaultController extends Controller
     }
 
 
-    /**
-     * @Route("/add", name="tarea_add")
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
-     */
-    public function addAction(Request $request)
-    {
-
-      die("aaaaaaaaaaa");
-    }
 
     /**
      * @Route("/edit/{id}", name="tarea_edit")
@@ -50,9 +40,6 @@ class DefaultController extends Controller
     {
         $a = $repositoriy->markToDo($id);
 
-
-
-        // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
             'articles' => $a
